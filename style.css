@@ -1,0 +1,16 @@
+#color-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.color-button {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+}
+
+.text-box-3c {
+    width: 2rem;
+    text-align: right;
+}
