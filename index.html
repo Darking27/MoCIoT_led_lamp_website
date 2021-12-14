@@ -12,100 +12,105 @@
 		<title>Led Lamp Controller</title>
 
 		<!-- Stichwörter -->
-		<link id="css" rel="stylesheet" type="text/css" href="style.css">
+		<link id="css" rel="stylesheet" type="text/css" href="layout.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 		<!-- async Seite weiterladen während Skript eingelesen wird!! -->
 		<script src="./logic.js" async></script>
+        <script src="./music.js" async></script>
 	</head>
 	<body>
-		<h1>LED Lamp Controller</h1>
+        <div id="site">
+            <h1 style="text-align: center;">LED Controller</h1>
 
-		<!-- Connection interface -->
-		<div id="initialize_connection">
-			<label>Status:</label>
-			<label>No Connection</label>
-			<br>
-			<label>IP-Address:</label>
-			<input type="text" id="enter_ip_address">
-			<br>
-			<button id="connect" onclick="connect()">Connect</button>
-		</div>
-		<div id="connection_status" style="display: none;">
-			<label>Status:</label>
-			<label>Connected</label>
-			<br>
-			<label>Lamp name:</label>
-			<label id="lamp_name"></label>
-			<br>
-			<label>Number of LEDs:</label>
-			<label id="lamp_leds"></label>
-			<br>
-			<label>IP-Address:</label>
-			<label id="ip_address">0.0.0.0</label>
-			<br>
-			<button id="disconnect" onclick="disconnect()">Disconnect</button>
-		</div>
+            <!-- Status bar disconnected -->
+            <div>
+                <p>Bitte verdinden sie sich mit einer LED Lampe um diese steuern zu können.</p>
+                <label>Adresse:</label>
+                <input type="text">
+            </div>
 
-		<!-- Color selector -->
-		<fieldset style="border: 1px black solid; display: inline-block;">
-			<legend>Colors</legend>
-			<div id="color-selector">
-				<button class="color-button" style="grid-column: 1; grid-row: 1; background-color: #FF0000;" onclick="send_all_colors(255, 0, 0)">R</button>
-				<button class="color-button" style="grid-column: 1; grid-row: 2; background-color: #FF6400;" onclick="send_all_colors(255, 100, 0)"></button>
-				<button class="color-button" style="grid-column: 1; grid-row: 3; background-color: #FF9600;" onclick="send_all_colors(255, 150, 0)"></button>
-				<button class="color-button" style="grid-column: 1; grid-row: 4; background-color: #FFC800;" onclick="send_all_colors(255, 200, 0)"></button>
-				<button class="color-button" style="grid-column: 1; grid-row: 5; background-color: #FFFF00;" onclick="send_all_colors(255, 255, 0)"></button>
-				<button class="color-button" style="grid-column: 2; grid-row: 1; background-color: #00FF00;" onclick="send_all_colors(0, 255, 0)">G</button>
-				<button class="color-button" style="grid-column: 2; grid-row: 2; background-color: #64FF00;" onclick="send_all_colors(100, 255, 0)"></button>
-				<button class="color-button" style="grid-column: 2; grid-row: 3; background-color: #00FF64;" onclick="send_all_colors(0, 255, 100)"></button>
-				<button class="color-button" style="grid-column: 2; grid-row: 4; background-color: #00FFC8;" onclick="send_all_colors(0, 255, 200)"></button>
-				<button class="color-button" style="grid-column: 2; grid-row: 5; background-color: #00C8FF;" onclick="send_all_colors(0, 200, 255)"></button>
-				<button class="color-button" style="grid-column: 3; grid-row: 1; background-color: #0000FF;" onclick="send_all_colors(0, 0, 255)">B</button>
-				<button class="color-button" style="grid-column: 3; grid-row: 2; background-color: #5500FF;" onclick="send_all_colors(85, 0, 255)"></button>
-				<button class="color-button" style="grid-column: 3; grid-row: 3; background-color: #9600FF;" onclick="send_all_colors(150, 0, 255)"></button>
-				<button class="color-button" style="grid-column: 3; grid-row: 4; background-color: #C800FF;" onclick="send_all_colors(200, 0, 255)"></button>
-				<button class="color-button" style="grid-column: 3; grid-row: 5; background-color: #FF00FF;" onclick="send_all_colors(255, 0, 255)"></button>
-				<button class="color-button" style="grid-column: 4; grid-row: 1; background-color: #FFFFFF;" onclick="send_all_colors(255, 255, 255)">W</button>
-			</div>
-			<div style="display: grid; grid-template-columns: auto auto auto;">
-				<label>Red:</label>
-				<input type="range" id="red-slider" min="0" max="255" value="0" onchange="send_color('red', value)">
-				<input type="text" class="text-box-3c" id="red-input" onchange="send_color('red', value)">
-				<label>Green:</label>
-				<input type="range" id="green-slider" min="0" max="255" value="0" onchange="send_color('green', value)">
-				<input type="text" class="text-box-3c" id="green-input" onchange="send_color('green', value)">
-				<label>Blue:</label>
-				<input type="range" id="blue-slider" min="0" max="255" value="0" onchange="send_color('blue', value)">
-				<input type="text" class="text-box-3c" id="blue-input" onchange="send_color('blue', value)">
-			</div>
-		</fieldset>
+            <!-- Status bar connected -->
+            <div>
+                <label>Lampenstatus:</label>
+                <label>An</label>
+                <br>
+                <label>Informationen über die Lampe:</label>
+                <ul>
+                    <li>
+                        <label>Name:</label>
+                        <label>Wohnzimmer</label>
+                    </li>
+                    <li>
+                        <label>Adresse:</label>
+                        <label>127.0.0.1</label>
+                    </li>
+                    <li>
+                        <label>Anzahl Leds:</label>
+                        <label>128</label>
+                    </li>
+                </ul>
+                <button>Verbingung zu Lampe trennen</button>
+            </div>
 
-		<br>
+            <!-- color selection -->
 
-		<fieldset style="border: 1px black solid; display: inline-block;">
-			<legend>Brightness</legend>
-			<input type="range" id="brightness-slider" onchange="send_brightness(value)">
-			<input type="text" class="text-box-3c" id="brightness-input" onchange="send_brightness(value)">
-			<label>%</label>
-		</fieldset>
+            <div>Aktuelle Farbauswahl:</div>
+            <button onclick="openNav()">Neue Farbsauswahl wählen</button>
 
-		<br>
+            <!-- TODO: + rgb sliders -->
+            <div id="myNav" class="overlay">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div id="color-selector">
+                    <button class="color-button" style="grid-column: 1; grid-row: 1; background-color: #FF0000;" onclick="send_all_colors(255, 0, 0)">R</button>
+                    <button class="color-button" style="grid-column: 1; grid-row: 2; background-color: #FF6400;" onclick="send_all_colors(255, 100, 0)"></button>
+                    <button class="color-button" style="grid-column: 1; grid-row: 3; background-color: #FF9600;" onclick="send_all_colors(255, 150, 0)"></button>
+                    <button class="color-button" style="grid-column: 1; grid-row: 4; background-color: #FFC800;" onclick="send_all_colors(255, 200, 0)"></button>
+                    <button class="color-button" style="grid-column: 1; grid-row: 5; background-color: #FFFF00;" onclick="send_all_colors(255, 255, 0)"></button>
+                    <button class="color-button" style="grid-column: 2; grid-row: 1; background-color: #00FF00;" onclick="send_all_colors(0, 255, 0)">G</button>
+                    <button class="color-button" style="grid-column: 2; grid-row: 2; background-color: #64FF00;" onclick="send_all_colors(100, 255, 0)"></button>
+                    <button class="color-button" style="grid-column: 2; grid-row: 3; background-color: #00FF64;" onclick="send_all_colors(0, 255, 100)"></button>
+                    <button class="color-button" style="grid-column: 2; grid-row: 4; background-color: #00FFC8;" onclick="send_all_colors(0, 255, 200)"></button>
+                    <button class="color-button" style="grid-column: 2; grid-row: 5; background-color: #00C8FF;" onclick="send_all_colors(0, 200, 255)"></button>
+                    <button class="color-button" style="grid-column: 3; grid-row: 1; background-color: #0000FF;" onclick="send_all_colors(0, 0, 255)">B</button>
+                    <button class="color-button" style="grid-column: 3; grid-row: 2; background-color: #5500FF;" onclick="send_all_colors(85, 0, 255)"></button>
+                    <button class="color-button" style="grid-column: 3; grid-row: 3; background-color: #9600FF;" onclick="send_all_colors(150, 0, 255)"></button>
+                    <button class="color-button" style="grid-column: 3; grid-row: 4; background-color: #C800FF;" onclick="send_all_colors(200, 0, 255)"></button>
+                    <button class="color-button" style="grid-column: 3; grid-row: 5; background-color: #FF00FF;" onclick="send_all_colors(255, 0, 255)"></button>
+                    <button class="color-button" style="grid-column: 4; grid-row: 1; background-color: #FFFFFF;" onclick="send_all_colors(255, 255, 255)">W</button>
+                </div>
+            </div>
 
-		<fieldset style="border: 1px black solid; display: inline-block;">
-			<legend>Program Speed</legend>
-			<input type="range" id="speed-slider" onchange="send_speed(value)">
-			<input type="text" class="text-box-3c" id="speed-input" onchange="send_speed(value)">
-			<label>%</label>
-		</fieldset>
+            <!-- brightness -->
 
-		<br>
+            <p>Helligkeit</p>
 
-		<fieldset style="border: 1px black solid; display: inline-block;">
-			<legend>Programs</legend>
-			<button onclick="set_program('static')">Static</button>
-			<button onclick="set_program('rainbow')">Rainbow</button>
-			<button>Audio</button>
-		</fieldset>
+            <!-- program selection -->
+
+            <!-- TODO: + speed -->
+            <p>Programme</p>
+            <button>Programm 1</button>
+            <br>
+            <button>Programm 2</button>
+            <br>
+            <button>Programm 3</button>
+
+            <!-- music visualization -->
+
+            <br>
+            <button onclick="initialize()">Musik Visualisierung anzeigen</button>
+        </div>
+        <canvas id="music-visu"></canvas>
+
+        <script>
+            function openNav() {
+              document.getElementById("myNav").style.width = "auto";
+            }
+            
+            function closeNav() {
+              document.getElementById("myNav").style.width = "0%";
+            }
+        </script>
+
 	</body>
 </html>
